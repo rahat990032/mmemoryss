@@ -1,0 +1,2977 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEMORY — То, что остается</title>
+    
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="images/product-1.jpg.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="images/hero-background.jpg.jpg" fetchpriority="high">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* MEMORY — Dark Minimalist Style (kusakabe inspired) - INLINE */
+        
+        :root {
+          --black: #000000;
+          --dark: #0B0B0B;
+          --gray: #1A1A1A;
+          --mid-gray: #6E6E6E;
+          --white: #EAEAEA;
+          --red: #8A1F1F;
+          --red-glow: rgba(138, 31, 31, 0.5);
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        html {
+          scroll-behavior: smooth;
+        }
+
+        body {
+          font-family: 'Inter', -apple-system, sans-serif;
+          background: #0B0B0B;
+          color: var(--white);
+          line-height: 1.6;
+          overflow-x: hidden;
+          position: relative;
+        }
+
+        /* Background Image with blur */
+        body::after {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url('images/fon.jpg.webp');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          filter: blur(3px) brightness(0.3);
+          z-index: -1;
+          opacity: 0.8;
+        }
+
+        /* Smoke/Fog Background - Optimized version */
+        body::before {
+          content: '';
+          position: fixed;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(ellipse at 50% 35%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.3) 15%, transparent 35%);
+          animation: smokeMove 60s ease-in-out infinite;
+          pointer-events: none;
+          z-index: 0;
+          filter: blur(80px);
+          will-change: transform;
+        }
+
+        @keyframes smokeMove {
+          0%, 100% { transform: translate(0, 0) scale(1.2); }
+          50% { transform: translate(3%, -3%) scale(1.22); }
+        }
+
+        /* Hero Section */
+        .hero {
+          min-height: 100vh;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 4rem 2rem 8rem;
+          z-index: 1;
+          background-image: url('images/hero-background.jpg.jpg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+        
+        .hero::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.4);
+          z-index: 0;
+        }
+
+        .grain {
+          display: none;
+        }
+
+        /* Logo Image */
+        .hero-logo {
+          position: absolute;
+          top: 2rem;
+          right: 1rem;
+          transform: none;
+          width: 250px;
+          height: 250px;
+          z-index: 10;
+        }
+
+        .logo-shape {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          animation: logoGlitch 5s ease-in-out infinite;
+          filter: brightness(0.5);
+          transition: transform 0.1s ease;
+        }
+        
+        .logo-shape:hover {
+          animation: logoShake 0.3s ease infinite;
+        }
+        
+        @keyframes logoShake {
+          0%, 100% { transform: translate(0, 0); }
+          25% { transform: translate(-3px, 2px); }
+          50% { transform: translate(3px, -2px); }
+          75% { transform: translate(-2px, -3px); }
+        }
+
+        @keyframes logoGlitch {
+          0%, 94%, 100% { 
+            transform: translate(0, 0);
+            opacity: 1;
+          }
+          95% { 
+            transform: translate(-4px, 3px);
+            opacity: 0.8;
+          }
+          97% { 
+            transform: translate(4px, -3px);
+            opacity: 0.9;
+          }
+        }
+
+        .hero-content {
+          position: relative;
+          z-index: 2;
+          text-align: center;
+          max-width: 100%;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .hero-title {
+          font-family: 'Cinzel', serif;
+          font-size: clamp(3.5rem, 12vw, 10rem);
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          margin-bottom: 1rem;
+          text-transform: uppercase;
+          color: var(--white);
+          position: relative;
+          text-shadow: 
+            0 0 40px rgba(255, 255, 255, 0.3),
+            2px 2px 0 rgba(138, 31, 31, 0.5),
+            4px 4px 0 rgba(0, 0, 0, 0.8);
+          white-space: nowrap;
+        }
+
+        .hero-subtitle {
+          font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+          letter-spacing: 0.6em;
+          text-transform: uppercase;
+          opacity: 0.6;
+          margin-bottom: 3rem;
+          color: var(--white);
+          font-weight: 300;
+        }
+
+        .hero-text {
+          display: none;
+        }
+
+        .hero-link {
+          display: inline-block;
+          color: var(--white);
+          text-decoration: none;
+          font-size: 0.9rem;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          padding: 1.3rem 3.5rem;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          transition: all 0.4s ease;
+          background: transparent;
+          font-weight: 400;
+          margin-top: 2rem;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .hero-link::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .hero-link:hover::before {
+          width: 300px;
+          height: 300px;
+        }
+
+        .hero-link:hover {
+          border-color: var(--white);
+          background: rgba(255, 255, 255, 0.05);
+          box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+          transform: translateY(-2px);
+        }
+
+        .hero-footer {
+          position: absolute;
+          bottom: 3rem;
+          left: 0;
+          right: 0;
+          z-index: 2;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+          padding: 0 2rem;
+          flex-wrap: wrap;
+        }
+
+        .footer-btn {
+          background: #0D0D0D;
+          border: 2px solid #8A1F1F;
+          color: rgba(255, 255, 255, 0.6);
+          padding: 0.9rem 1.8rem;
+          font-size: 0.75rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-weight: 300;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .footer-btn::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 0;
+          background: rgba(255, 255, 255, 0.05);
+          transition: height 0.3s ease;
+        }
+
+        .footer-btn:hover::after {
+          height: 100%;
+        }
+
+        .footer-btn:hover {
+          border-color: rgba(255, 255, 255, 0.5);
+          color: var(--white);
+          background: rgba(255, 255, 255, 0.03);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Catalog Section */
+        .catalog {
+          min-height: 100vh;
+          background: #0B0B0B;
+          padding: 2rem;
+          position: relative;
+          z-index: 1;
+        }
+
+        /* Philosophical Text Section */
+        .philosophy-section {
+          max-width: 1400px;
+          margin: 0 auto 8rem;
+          padding: 6rem 2rem;
+          text-align: center;
+          position: relative;
+          z-index: 2;
+          background: #0D0D0D;
+          border: 1px solid rgba(138, 31, 31, 0.3);
+        }
+
+        .philosophy-text {
+          font-family: 'Cinzel', serif;
+          font-size: clamp(2rem, 5vw, 4rem);
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          line-height: 1.3;
+          text-transform: uppercase;
+          color: var(--white);
+          margin-bottom: 3rem;
+          opacity: 0.9;
+        }
+
+        .philosophy-text span {
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+
+        .philosophy-text .highlight {
+          color: var(--red);
+          text-shadow: 0 0 20px var(--red-glow);
+        }
+
+        .philosophy-divider {
+          width: 100px;
+          height: 2px;
+          background: var(--red);
+          margin: 0 auto 4rem;
+          box-shadow: 0 0 15px var(--red-glow);
+        }
+
+        .philosophy-section .about-content {
+          max-width: 700px;
+          margin: 0 auto;
+        }
+
+        .philosophy-section .about-text {
+          text-align: left;
+        }
+
+        .philosophy-section .about-text p {
+          font-size: 1rem;
+          line-height: 1.9;
+          color: rgba(234, 234, 234, 0.8);
+          margin-bottom: 1.5rem;
+          letter-spacing: 0.02em;
+        }
+
+        .philosophy-section .about-signature {
+          font-family: 'Cinzel', serif;
+          font-style: italic;
+          color: var(--mid-gray);
+          margin-top: 3rem;
+          text-align: right;
+          font-size: 0.95rem;
+        }
+
+        /* Material Section - Dark minimalist blocks like reference */
+        .material-section {
+          max-width: 1400px;
+          margin: 0 auto 8rem;
+          padding: 6rem 2rem;
+          position: relative;
+          z-index: 2;
+          background: #0D0D0D;
+          border: 1px solid rgba(138, 31, 31, 0.3);
+        }
+
+        .material-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+        }
+
+        .material-card {
+          background: rgba(11, 11, 11, 0.8);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          padding: 3rem 2rem;
+          text-align: center;
+          transition: all 0.4s ease;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .material-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 0;
+          background: linear-gradient(180deg, rgba(138, 31, 31, 0.1) 0%, transparent 100%);
+          transition: height 0.4s ease;
+        }
+
+        .material-card:hover::before {
+          height: 100%;
+        }
+
+        .material-card:hover {
+          border-color: rgba(138, 31, 31, 0.5);
+          box-shadow: 0 0 30px rgba(138, 31, 31, 0.3);
+          transform: translateY(-5px);
+        }
+
+        .material-number {
+          font-size: 2.5rem;
+          font-weight: 900;
+          color: rgba(138, 31, 31, 0.8);
+          margin-bottom: 1.5rem;
+          text-shadow: 0 0 20px rgba(138, 31, 31, 0.4);
+          position: relative;
+          z-index: 1;
+        }
+
+        .material-title {
+          font-family: 'Cinzel', serif;
+          font-size: 1.1rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin-bottom: 1rem;
+          color: var(--white);
+          position: relative;
+          z-index: 1;
+        }
+
+        .material-desc {
+          font-size: 0.85rem;
+          color: rgba(234, 234, 234, 0.6);
+          line-height: 1.8;
+          letter-spacing: 0.02em;
+          position: relative;
+          z-index: 1;
+        }
+
+        .catalog-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 2rem 0;
+          border-bottom: 1px solid var(--gray);
+          margin-bottom: 3rem;
+          flex-wrap: wrap;
+          gap: 1.5rem;
+        }
+
+        .logo {
+          font-family: 'Cinzel', serif;
+          font-size: 1.5rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-decoration: none;
+          color: var(--white);
+          text-transform: uppercase;
+        }
+
+        .catalog-nav {
+          display: flex;
+          gap: 2rem;
+          flex-wrap: wrap;
+        }
+
+        .nav-btn {
+          background: none;
+          border: none;
+          color: var(--mid-gray);
+          font-size: 0.9rem;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          padding: 0.5rem 0;
+          position: relative;
+          font-weight: 400;
+        }
+
+        .nav-btn::after {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          width: 0;
+          height: 1px;
+          background: var(--red);
+          box-shadow: 0 0 10px var(--red-glow);
+          transition: width 0.3s ease;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+          color: var(--white);
+        }
+
+        .nav-btn.active::after {
+          width: 100%;
+        }
+
+        .cart-btn {
+          background: transparent;
+          border: 1px solid var(--gray);
+          color: var(--white);
+          padding: 0.7rem 1.2rem;
+          font-size: 0.8rem;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+          transition: all 0.3s ease;
+          letter-spacing: 0.05em;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .cart-btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(138, 31, 31, 0.2), transparent);
+          transition: left 0.5s ease;
+        }
+
+        .cart-btn:hover::before {
+          left: 100%;
+        }
+
+        .cart-btn:hover {
+          border-color: var(--red);
+          box-shadow: 0 0 15px var(--red-glow);
+          transform: translateY(-2px);
+        }
+
+        .cart-icon {
+          font-size: 1rem;
+        }
+
+        .cart-count {
+          font-weight: 600;
+        }
+
+        /* Telegram Banner */
+        .tg-banner {
+          text-align: center;
+          padding: 1.5rem;
+          background: var(--dark);
+          border: 1px solid var(--gray);
+          margin-bottom: 4rem;
+        }
+
+        .tg-banner p {
+          font-size: 0.85rem;
+          letter-spacing: 0.05em;
+          color: var(--mid-gray);
+        }
+
+        .tg-banner a {
+          color: var(--white);
+          text-decoration: none;
+          border-bottom: 1px solid var(--red);
+          transition: all 0.3s;
+        }
+
+        .tg-banner a:hover {
+          color: var(--red);
+        }
+
+        /* Products Grid */
+        .products-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 3rem;
+          position: relative;
+          z-index: 2;
+        }
+
+        .product-card {
+          cursor: pointer;
+          transition: transform 0.3s ease;
+          position: relative;
+          background: rgba(0, 0, 0, 0.6);
+          padding: 0;
+          border: 2px solid rgba(138, 31, 31, 0.3);
+        }
+
+        .product-card:hover {
+          transform: translateY(-8px);
+          border-color: rgba(138, 31, 31, 1);
+          box-shadow: 0 0 25px rgba(138, 31, 31, 0.5);
+          animation: cardGlitch 0.4s ease;
+        }
+        
+        @keyframes cardGlitch {
+          0%, 100% { transform: translateY(-8px); }
+          25% { transform: translate(-2px, -6px); }
+          50% { transform: translate(2px, -10px); }
+          75% { transform: translate(-1px, -7px); }
+        }
+
+        .product-card:hover .product-image {
+          animation: glitchHover 0.3s ease;
+        }
+
+        @keyframes glitchHover {
+          0%, 100% { transform: translate(0); filter: none; }
+          20% { transform: translate(-3px, 2px); filter: hue-rotate(90deg); }
+          40% { transform: translate(3px, -2px); filter: hue-rotate(-90deg); }
+          60% { transform: translate(-2px, -3px); filter: hue-rotate(90deg); }
+          80% { transform: translate(2px, 3px); filter: hue-rotate(-90deg); }
+        }
+
+        .product-image {
+          width: 100%;
+          aspect-ratio: 3/4;
+          background: #000000;
+          margin-bottom: 1.5rem;
+          overflow: hidden;
+          position: relative;
+          border: none;
+        }
+        
+        /* Image loading optimization */
+        .product-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          filter: grayscale(100%) contrast(1.2) brightness(0.4);
+          transition: transform 0.4s ease, filter 0.2s ease, opacity 0.3s ease;
+          will-change: transform;
+          opacity: 0;
+        }
+        
+        .product-image img.loaded {
+          opacity: 1;
+        }
+
+        .product-image::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+          opacity: 1;
+          transition: opacity 0.3s;
+          pointer-events: none;
+        }
+
+        .product-card:hover .product-image::after {
+          opacity: 0.7;
+        }
+
+        .product-card:hover .product-image img {
+          transform: scale(1.08);
+          filter: grayscale(100%) contrast(1.3) brightness(0.5);
+        }
+
+        .product-favorite {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          background: rgba(0, 0, 0, 0.8);
+          border: 1px solid var(--gray);
+          color: var(--white);
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+          cursor: pointer;
+          z-index: 10;
+          transition: all 0.3s ease;
+        }
+
+        .product-favorite:hover,
+        .product-favorite.active {
+          background: var(--red);
+          border-color: var(--red);
+          box-shadow: 0 0 20px var(--red-glow);
+        }
+
+        .product-info {
+          display: flex;
+          justify-content: space-between;
+          align-items: start;
+          gap: 1rem;
+        }
+
+        .product-name {
+          font-size: 0.95rem;
+          font-weight: 500;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: var(--white);
+        }
+
+        .product-price {
+          font-size: 0.95rem;
+          font-weight: 600;
+          white-space: nowrap;
+          color: var(--white);
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+          position: fixed;
+          top: 0;
+          right: -550px;
+          width: 550px;
+          height: 100vh;
+          background: #0B0B0B;
+          border-left: 1px solid var(--gray);
+          z-index: 3000;
+          transition: transform 0.2s ease;
+          transform: translateX(0);
+          display: flex;
+          flex-direction: column;
+          will-change: transform;
+        }
+
+        .cart-sidebar.active {
+          transform: translateX(-550px);
+        }
+
+        .cart-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.95);
+          z-index: 2999;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+        }
+
+        .cart-overlay.active {
+          opacity: 1;
+          visibility: visible;
+          transition: opacity 0.2s ease, visibility 0s linear 0s;
+        }
+
+        .cart-header {
+          padding: 2.5rem;
+          border-bottom: 1px solid var(--gray);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .cart-header h3 {
+          font-size: 1.5rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: var(--white);
+        }
+
+        .cart-close {
+          background: none;
+          border: none;
+          color: var(--white);
+          font-size: 2.5rem;
+          cursor: pointer;
+          line-height: 1;
+          transition: all 0.3s ease;
+          opacity: 0.7;
+        }
+
+        .cart-close:hover {
+          opacity: 1;
+          transform: rotate(90deg);
+        }
+
+        .cart-items {
+          flex: 1;
+          overflow-y: auto;
+          padding: 2.5rem;
+        }
+
+        .cart-empty {
+          text-align: center;
+          color: var(--mid-gray);
+          padding: 5rem 0;
+          font-size: 0.9rem;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+
+        .cart-item {
+          display: flex;
+          gap: 1.5rem;
+          margin-bottom: 2.5rem;
+          padding-bottom: 2.5rem;
+          border-bottom: 1px solid var(--gray);
+          position: relative;
+        }
+
+        .cart-item-image {
+          width: 90px;
+          height: 120px;
+          object-fit: cover;
+          filter: grayscale(100%) brightness(0.6);
+          border: 1px solid var(--gray);
+        }
+
+        .cart-item-info {
+          flex: 1;
+        }
+
+        .cart-item-name {
+          font-size: 0.9rem;
+          font-weight: 500;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          margin-bottom: 0.5rem;
+          color: var(--white);
+        }
+
+        .cart-item-size {
+          font-size: 0.8rem;
+          color: var(--mid-gray);
+          margin-bottom: 0.75rem;
+        }
+
+        .cart-item-price {
+          font-size: 0.95rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
+          color: var(--white);
+        }
+
+        .cart-item-qty {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        .qty-btn {
+          background: transparent;
+          border: 1px solid var(--gray);
+          color: var(--white);
+          width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          font-size: 1rem;
+          transition: all 0.3s ease;
+        }
+
+        .qty-btn:hover {
+          border-color: var(--red);
+          box-shadow: 0 0 10px var(--red-glow);
+        }
+
+        .cart-item-remove {
+          position: absolute;
+          top: 0;
+          right: 0;
+          background: none;
+          border: none;
+          color: var(--mid-gray);
+          font-size: 1.5rem;
+          cursor: pointer;
+          opacity: 0.5;
+          transition: opacity 0.3s;
+        }
+
+        .cart-item-remove:hover {
+          opacity: 1;
+          color: var(--red);
+        }
+
+        .cart-footer {
+          padding: 2.5rem;
+          border-top: 1px solid var(--gray);
+        }
+
+        .cart-total {
+          display: flex;
+          justify-content: space-between;
+          font-size: 1.2rem;
+          font-weight: 600;
+          margin-bottom: 2rem;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: var(--white);
+        }
+
+        .cart-checkout {
+          width: 100%;
+          background: var(--white);
+          color: var(--black);
+          border: none;
+          padding: 1.2rem;
+          font-size: 0.9rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .cart-checkout::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          background: var(--red);
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .cart-checkout:hover::before {
+          width: 500px;
+          height: 500px;
+        }
+
+        .cart-checkout:hover {
+          color: var(--white);
+          box-shadow: 0 0 20px var(--red-glow);
+          transform: translateY(-2px);
+        }
+
+        .cart-checkout span {
+          position: relative;
+          z-index: 1;
+        }
+
+        /* Modals - базовые стили */
+        .product-modal, .checkout-modal, .info-modal {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 4000;
+          display: none;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+        }
+
+        .product-modal.active, .checkout-modal.active, .info-modal.active {
+          display: flex;
+          animation: modalFadeIn 0.1s ease;
+        }
+        
+        @keyframes modalFadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .modal-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.97);
+        }
+
+        .modal-content {
+          position: relative;
+          background: #0B0B0B;
+          max-width: 1200px;
+          width: 100%;
+          max-height: 90vh;
+          overflow-y: auto;
+          border: 1px solid var(--gray);
+          z-index: 1;
+          animation: modalSlideIn 0.15s ease;
+        }
+        
+        @keyframes modalSlideIn {
+          from { 
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to { 
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .modal-close {
+          position: absolute;
+          top: 1.5rem;
+          right: 1.5rem;
+          background: transparent;
+          border: 1px solid var(--gray);
+          color: var(--white);
+          width: 50px;
+          height: 50px;
+          font-size: 2rem;
+          cursor: pointer;
+          z-index: 10;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+          border-color: var(--red);
+          box-shadow: 0 0 15px var(--red-glow);
+          transform: rotate(90deg);
+        }
+
+        /* Product Modal Specific */
+        .modal-body {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 3rem;
+          padding: 3rem;
+        }
+
+        .modal-gallery {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .gallery-main {
+          width: 100%;
+          aspect-ratio: 3/4;
+          background: var(--dark);
+          border: 1px solid var(--gray);
+          overflow: hidden;
+        }
+
+        .gallery-main img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          filter: grayscale(100%) brightness(0.6);
+        }
+
+        .gallery-thumbs {
+          display: flex;
+          gap: 0.75rem;
+        }
+
+        .gallery-thumb {
+          width: 80px;
+          height: 100px;
+          cursor: pointer;
+          border: 1px solid var(--gray);
+          overflow: hidden;
+          opacity: 0.5;
+          transition: all 0.3s;
+        }
+
+        .gallery-thumb.active {
+          opacity: 1;
+          border-color: var(--red);
+        }
+
+        .gallery-thumb img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          filter: grayscale(100%) brightness(0.6);
+        }
+
+        .modal-info {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .modal-title {
+          font-family: 'Cinzel', serif;
+          font-size: 1.8rem;
+          font-weight: 600;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+        }
+
+        .modal-price {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--white);
+        }
+
+        .modal-desc {
+          color: var(--mid-gray);
+          line-height: 1.8;
+          font-size: 0.95rem;
+        }
+
+        .modal-sizes {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .modal-sizes label {
+          font-size: 0.9rem;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: var(--mid-gray);
+        }
+
+        .size-options {
+          display: flex;
+          gap: 0.75rem;
+          flex-wrap: wrap;
+        }
+
+        .size-btn {
+          background: transparent;
+          border: 1px solid var(--gray);
+          color: var(--white);
+          padding: 0.75rem 1.5rem;
+          font-size: 0.9rem;
+          cursor: pointer;
+          transition: all 0.3s;
+          letter-spacing: 0.05em;
+        }
+
+        .size-btn:hover,
+        .size-btn.active {
+          border-color: var(--red);
+          background: rgba(138, 31, 31, 0.1);
+          box-shadow: 0 0 15px var(--red-glow);
+        }
+
+        .size-error {
+          color: var(--red);
+          font-size: 0.85rem;
+          min-height: 1.2rem;
+        }
+
+        .modal-actions {
+          display: flex;
+          gap: 1rem;
+          margin-top: auto;
+        }
+
+        .modal-favorite {
+          background: transparent;
+          border: 1px solid var(--gray);
+          color: var(--white);
+          width: 60px;
+          height: 60px;
+          font-size: 1.5rem;
+          cursor: pointer;
+          transition: all 0.3s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .modal-favorite:hover,
+        .modal-favorite.active {
+          border-color: var(--red);
+          background: rgba(138, 31, 31, 0.1);
+          box-shadow: 0 0 15px var(--red-glow);
+        }
+
+        .modal-add-cart {
+          flex: 1;
+          background: var(--white);
+          color: var(--black);
+          border: none;
+          padding: 1.2rem;
+          font-size: 0.9rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: all 0.3s;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .modal-add-cart::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          background: var(--red);
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .modal-add-cart:hover::before {
+          width: 500px;
+          height: 500px;
+        }
+
+        .modal-add-cart:hover {
+          color: var(--white);
+          box-shadow: 0 0 20px var(--red-glow);
+          transform: translateY(-2px);
+        }
+
+        .modal-add-cart span {
+          position: relative;
+          z-index: 1;
+        }
+
+        /* Checkout Modal */
+        .checkout-body {
+          padding: 3rem;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .checkout-body h2 {
+          font-family: 'Cinzel', serif;
+          font-size: 1.8rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin-bottom: 2rem;
+        }
+
+        .checkout-form {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .form-group {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .form-group label {
+          font-size: 0.85rem;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: var(--mid-gray);
+        }
+
+        .form-group input,
+        .form-group textarea {
+          background: var(--dark);
+          border: 1px solid var(--gray);
+          color: var(--white);
+          padding: 1rem;
+          font-size: 0.95rem;
+          font-family: 'Inter', sans-serif;
+          transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+          outline: none;
+          border-color: var(--red);
+          box-shadow: 0 0 10px var(--red-glow);
+        }
+
+        .form-group textarea {
+          min-height: 100px;
+          resize: vertical;
+        }
+
+        .delivery-note {
+          font-size: 0.85rem;
+          color: var(--mid-gray);
+          font-style: italic;
+        }
+
+        /* Payment and Delivery Methods */
+        .form-section {
+          margin: 2rem 0;
+        }
+
+        .form-section h3 {
+          font-family: 'Cinzel', serif;
+          font-size: 1rem;
+          font-weight: 500;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          margin-bottom: 1rem;
+          color: var(--white);
+        }
+
+        .payment-methods,
+        .delivery-methods {
+          display: flex;
+          gap: 1rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .payment-methods.error,
+        .delivery-methods.error {
+          border: 2px solid var(--red);
+          padding: 1rem;
+        }
+
+        .payment-option,
+        .delivery-option {
+          flex: 1;
+          padding: 1.5rem;
+          border: 2px solid var(--gray);
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          background: rgba(0, 0, 0, 0.3);
+        }
+
+        .payment-option:hover,
+        .delivery-option:hover {
+          border-color: var(--red);
+          background: rgba(138, 31, 31, 0.1);
+        }
+
+        .payment-option.selected,
+        .delivery-option.selected {
+          border-color: var(--red);
+          background: rgba(138, 31, 31, 0.2);
+          box-shadow: 0 0 15px var(--red-glow);
+        }
+
+        .payment-icon {
+          font-size: 2rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .payment-label,
+        .delivery-label {
+          font-weight: 500;
+          font-size: 0.9rem;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: var(--white);
+        }
+
+        .error-message {
+          display: block;
+          color: var(--red);
+          font-size: 0.75rem;
+          margin-top: 0.5rem;
+          min-height: 1rem;
+        }
+
+        .checkout-submit {
+          width: 100%;
+          background: var(--white);
+          color: var(--black);
+          border: none;
+          padding: 1.2rem;
+          font-size: 0.9rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: all 0.3s;
+          margin-top: 1rem;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .checkout-submit::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          background: var(--red);
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .checkout-submit:hover::before {
+          width: 500px;
+          height: 500px;
+        }
+
+        .checkout-submit:hover {
+          color: var(--white);
+          box-shadow: 0 0 20px var(--red-glow);
+          transform: translateY(-2px);
+        }
+
+        .checkout-submit span {
+          position: relative;
+          z-index: 1;
+        }
+
+        /* Info Modal */
+        .info-body {
+          padding: 3rem;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .info-body h2 {
+          font-family: 'Cinzel', serif;
+          font-size: 1.8rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin-bottom: 2rem;
+        }
+
+        .info-body p {
+          color: var(--mid-gray);
+          line-height: 1.8;
+          margin-bottom: 1rem;
+          font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .site-footer {
+          background: #0D0D0D;
+          border-top: 1px solid rgba(138, 31, 31, 0.3);
+          padding: 4rem 2rem 2rem;
+          margin-top: 6rem;
+          position: relative;
+          z-index: 2;
+        }
+
+        .footer-content {
+          max-width: 1400px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 3rem;
+          margin-bottom: 3rem;
+        }
+
+        .footer-section {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .footer-title {
+          font-family: 'Cinzel', serif;
+          font-size: 1.5rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: var(--white);
+          margin-bottom: 0.5rem;
+        }
+
+        .footer-tagline {
+          font-size: 0.85rem;
+          color: var(--mid-gray);
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+
+        .footer-heading {
+          font-family: 'Cinzel', serif;
+          font-size: 0.9rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: var(--white);
+          margin-bottom: 0.5rem;
+        }
+
+        .footer-links {
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .footer-links a,
+        .footer-link {
+          color: var(--mid-gray);
+          text-decoration: none;
+          font-size: 0.85rem;
+          transition: all 0.3s ease;
+          letter-spacing: 0.05em;
+        }
+
+        .footer-links a:hover,
+        .footer-link:hover {
+          color: var(--white);
+          padding-left: 5px;
+        }
+
+        .footer-socials {
+          display: flex;
+          gap: 1rem;
+        }
+
+        .social-link {
+          width: 40px;
+          height: 40px;
+          border: 1px solid var(--gray);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--mid-gray);
+          transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+          border-color: var(--red);
+          color: var(--white);
+          box-shadow: 0 0 15px var(--red-glow);
+          transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding-top: 2rem;
+          border-top: 1px solid var(--gray);
+          text-align: center;
+        }
+
+        .footer-bottom p {
+          color: var(--mid-gray);
+          font-size: 0.8rem;
+          letter-spacing: 0.05em;
+        }
+
+        /* Size Chart Styles */
+        .size-table-wrapper {
+          overflow-x: auto;
+          margin: 2rem 0;
+        }
+
+        .size-table {
+          width: 100%;
+          border-collapse: collapse;
+          background: rgba(26, 26, 26, 0.5);
+        }
+
+        .size-table th,
+        .size-table td {
+          padding: 1rem;
+          text-align: left;
+          border: 1px solid var(--gray);
+        }
+
+        .size-table th {
+          background: rgba(138, 31, 31, 0.2);
+          font-weight: 600;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          font-size: 0.85rem;
+        }
+
+        .size-table td {
+          color: var(--mid-gray);
+          font-size: 0.9rem;
+        }
+
+        .size-table td strong {
+          color: var(--white);
+          font-size: 1.1rem;
+        }
+
+        .size-guide {
+          margin-top: 2rem;
+          padding: 2rem;
+          background: rgba(26, 26, 26, 0.5);
+          border: 1px solid var(--gray);
+        }
+
+        .size-guide h3 {
+          font-family: 'Cinzel', serif;
+          font-size: 1.2rem;
+          margin-bottom: 1rem;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+        }
+
+        .size-guide ul {
+          list-style: none;
+          margin-bottom: 1.5rem;
+        }
+
+        .size-guide li {
+          padding: 0.5rem 0;
+          color: var(--mid-gray);
+          line-height: 1.6;
+        }
+
+        .size-guide li strong {
+          color: var(--white);
+        }
+
+        .size-note {
+          color: var(--red);
+          font-size: 0.85rem;
+          font-style: italic;
+          margin-top: 1rem;
+        }
+
+        /* Info Sections */
+        .info-section {
+          margin-bottom: 2.5rem;
+          padding-bottom: 2rem;
+          border-bottom: 1px solid var(--gray);
+        }
+
+        .info-section:last-child {
+          border-bottom: none;
+        }
+
+        .info-section h3 {
+          font-family: 'Cinzel', serif;
+          font-size: 1.2rem;
+          margin-bottom: 1rem;
+          letter-spacing: 0.05em;
+          color: var(--white);
+        }
+
+        .info-section ul,
+        .info-section ol {
+          margin-left: 1.5rem;
+          color: var(--mid-gray);
+          line-height: 1.8;
+        }
+
+        .info-section li {
+          margin-bottom: 0.5rem;
+        }
+
+        .info-section a {
+          color: var(--red);
+          text-decoration: none;
+          border-bottom: 1px solid var(--red);
+          transition: all 0.3s ease;
+        }
+
+        .info-section a:hover {
+          color: var(--white);
+          border-color: var(--white);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .cart-sidebar {
+            width: 100%;
+            right: -100%;
+          }
+          
+          .cart-sidebar.active {
+            transform: translateX(-100%);
+          }
+          
+          .products-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 0 1rem;
+          }
+          
+          .product-card {
+            max-width: 100%;
+          }
+          
+          .hero-footer {
+            flex-wrap: wrap;
+            gap: 0.75rem;
+          }
+          
+          .footer-btn {
+            padding: 0.7rem 1.2rem;
+            font-size: 0.7rem;
+          }
+          
+          .catalog-header {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          
+          .catalog-nav {
+            width: 100%;
+            justify-content: flex-start;
+            gap: 1rem;
+          }
+          
+          /* Product Modal Mobile */
+          .modal-body {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 2rem 1.5rem;
+          }
+          
+          .modal-close {
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+          }
+          
+          .gallery-main {
+            aspect-ratio: 4/5;
+          }
+          
+          .gallery-thumbs {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+          }
+          
+          .gallery-thumbs::-webkit-scrollbar {
+            display: none;
+          }
+          
+          .gallery-thumb {
+            flex-shrink: 0;
+            width: 70px;
+            height: 90px;
+          }
+          
+          .modal-title {
+            font-size: 1.3rem;
+          }
+          
+          .modal-price {
+            font-size: 1.2rem;
+          }
+          
+          .modal-desc {
+            font-size: 0.9rem;
+          }
+          
+          .size-options {
+            gap: 0.5rem;
+          }
+          
+          .size-btn {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+          }
+          
+          .modal-actions {
+            flex-direction: column;
+            gap: 1rem;
+          }
+          
+          .modal-favorite {
+            width: 100%;
+            height: 50px;
+          }
+          
+          .modal-add-cart {
+            width: 100%;
+          }
+          
+          /* Checkout Modal Mobile */
+          .checkout-body {
+            padding: 2rem 1.5rem;
+          }
+          
+          .checkout-body h2 {
+            font-size: 1.3rem;
+          }
+          
+          .payment-methods,
+          .delivery-methods {
+            flex-direction: column;
+          }
+          
+          .payment-option,
+          .delivery-option {
+            padding: 1.2rem;
+          }
+          
+          /* Philosophy Section Mobile */
+          .philosophy-section {
+            padding: 3rem 1.5rem;
+          }
+          
+          .philosophy-text {
+            font-size: clamp(1.5rem, 8vw, 2.5rem);
+          }
+          
+          /* Material Section Mobile */
+          .material-section {
+            padding: 3rem 1.5rem;
+          }
+          
+          .material-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+          }
+          
+          .material-card {
+            padding: 2rem 1.5rem;
+          }
+          
+          /* Hero Mobile */
+          .hero {
+            padding: 3rem 1rem 6rem;
+          }
+          
+          .hero-logo {
+            width: 160px;
+            height: 160px;
+            top: 1rem;
+            right: 1rem;
+          }
+          
+          .hero-title {
+            font-size: clamp(2.5rem, 15vw, 5rem);
+          }
+          
+          .hero-subtitle {
+            font-size: clamp(0.6rem, 2vw, 0.9rem);
+          }
+          
+          .hero-link {
+            padding: 1rem 2.5rem;
+            font-size: 0.8rem;
+          }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-logo">
+            <img src="images/logo.png" alt="MEMORY" class="logo-shape" loading="lazy">
+        </div>
+        <div class="grain"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">MEMORY</h1>
+            <p class="hero-subtitle">L A S T &nbsp; M E M O R Y</p>
+            <a href="#catalog" class="hero-link">SHOP NOW</a>
+        </div>
+        
+        <div class="hero-footer">
+            <button class="footer-btn" data-modal="about">О нас</button>
+            <button class="footer-btn" data-modal="contacts">Контакты</button>
+            <button class="footer-btn" data-modal="delivery">Доставка и оплата</button>
+            <button class="footer-btn" data-modal="terms">Оферта</button>
+        </div>
+    </section>
+
+    <!-- Philosophy & About Section -->
+    <section class="philosophy-section">
+        <div class="philosophy-text">
+            <span>ЧЕЛОВЕК ПРОДОЛЖАЕТ</span>
+            <span class="highlight">СУЩЕСТВОВАТЬ</span>
+            <span>ПОКА О НЁМ ПОМНЯТ</span>
+        </div>
+        <div class="philosophy-divider"></div>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <p>MEMORY — это не просто одежда. Это манифест о том, что остается после нас.</p>
+                
+                <p>Бренд родился из личной истории. Из памяти о близком друге, который ушел слишком рано. Из осознания, что человек продолжает существовать, пока о нём помнят.</p>
+                
+                <p>Каждая вещь MEMORY — это напоминание о том, что важно. О людях, которые изменили нас. О моментах, которые определили нас. О том, что мы несем с собой.</p>
+                
+                <p>Мы создаем вещи вне времени. Минималистичные, качественные, честные. Без лишнего шума и показухи. Только суть.</p>
+                
+                <p class="about-signature">— Основатель MEMORY</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Material Section -->
+    <section class="material-section">
+        <div class="material-grid">
+            <div class="material-card">
+                <div class="material-number">01</div>
+                <h3 class="material-title">Премиальный хлопок</h3>
+                <p class="material-desc">100% органический хлопок высшего качества. Плотность 240 г/м². Мягкость, которая остается навсегда.</p>
+            </div>
+            <div class="material-card">
+                <div class="material-number">02</div>
+                <h3 class="material-title">Оверсайз крой</h3>
+                <p class="material-desc">Свободный силуэт для максимального комфорта. Каждая вещь создана для того, чтобы стать частью твоей памяти.</p>
+            </div>
+            <div class="material-card">
+                <div class="material-number">03</div>
+                <h3 class="material-title">Минимализм</h3>
+                <p class="material-desc">Никаких лишних деталей. Только суть. Дизайн, который не устареет. Вещи вне времени.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section class="catalog" id="catalog">
+        <div class="grain"></div>
+        
+        <!-- Header -->
+        <header class="catalog-header">
+            <a href="#" class="logo">MEMORY</a>
+            <nav class="catalog-nav">
+                <button class="nav-btn active" data-filter="last-drop">Last Drop</button>
+                <button class="nav-btn" data-filter="clothing">Clothing</button>
+                <button class="nav-btn" data-filter="accessories">Accessories</button>
+            </nav>
+            <div style="display: flex; align-items: center; gap: 2rem;">
+                <button class="nav-btn" data-filter="favorites" style="color: var(--red);">♥ Избранное</button>
+                <button class="cart-btn">
+                    <span class="cart-icon">🛒</span>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Telegram Banner -->
+        <div class="tg-banner">
+            <p>Следи за новостями и дропами в нашем <a href="https://t.me/dirtybitchT_T" target="_blank">Telegram</a></p>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid"></div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Корзина</h3>
+            <button class="cart-close">×</button>
+        </div>
+        <div class="cart-items">
+            <div class="cart-empty">Корзина пуста</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Итого:</span>
+                <span class="cart-amount">0 ₽</span>
+            </div>
+            <button class="cart-checkout"><span>Оформить заказ</span></button>
+        </div>
+    </div>
+    <div class="cart-overlay"></div>
+
+    <!-- Product Modal -->
+    <div class="product-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <div class="gallery-main"></div>
+                    <div class="gallery-thumbs"></div>
+                </div>
+                <div class="modal-info">
+                    <h2 class="modal-title"></h2>
+                    <div class="modal-price"></div>
+                    <p class="modal-desc"></p>
+                    <div class="modal-sizes">
+                        <label>Размер:</label>
+                        <div class="size-options"></div>
+                        <div class="size-error"></div>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="modal-favorite">♡</button>
+                        <button class="modal-add-cart"><span>Добавить в корзину</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <div class="checkout-body">
+                <h2>Оформление заказа</h2>
+                <form class="checkout-form">
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text" name="name" required>
+                        <span class="error-message" data-field="name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required>
+                        <span class="error-message" data-field="email"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Телефон</label>
+                        <input type="tel" name="phone" required>
+                        <span class="error-message" data-field="phone"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Адрес доставки</label>
+                        <textarea name="address" required></textarea>
+                        <span class="error-message" data-field="address"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Telegram (обязательно для связи) *</label>
+                        <input type="text" name="telegram" placeholder="@username" required>
+                        <span class="error-message" data-field="telegram"></span>
+                    </div>
+                    
+                    <!-- Способы оплаты -->
+                    <div class="form-section">
+                        <h3>Способ оплаты *</h3>
+                        <div class="payment-methods">
+                            <div class="payment-option" data-payment="card">
+                                <div class="payment-icon">💳</div>
+                                <div class="payment-label">Карта</div>
+                            </div>
+                            <div class="payment-option" data-payment="crypto">
+                                <div class="payment-icon">₿</div>
+                                <div class="payment-label">Крипта</div>
+                            </div>
+                        </div>
+                        <span class="error-message" data-field="payment"></span>
+                    </div>
+                    
+                    <!-- Способы доставки -->
+                    <div class="form-section">
+                        <h3>Способ доставки *</h3>
+                        <div class="delivery-methods">
+                            <div class="delivery-option" data-delivery="cdek">
+                                <div class="delivery-label">СДЕК</div>
+                            </div>
+                            <div class="delivery-option" data-delivery="ozon">
+                                <div class="delivery-label">Ozon</div>
+                            </div>
+                        </div>
+                        <span class="error-message" data-field="delivery"></span>
+                    </div>
+                    
+                    <div class="delivery-note">
+                        * Доставка оплачивается покупателем
+                    </div>
+                    <button type="submit" class="checkout-submit"><span>Оплатить</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Modals -->
+    <div class="info-modal" id="about-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <div class="info-body">
+                <h2>О нас</h2>
+                <p style="line-height: 1.8; font-size: 1rem; color: var(--mid-gray);">
+                    MEMORY — это не просто одежда.<br>
+                    Это то, что остается.<br><br>
+                    Каждая вещь, это фрагмент<br>
+                    момента, чувства, той версии тебя,<br>
+                    которая когда-то существовала.<br><br>
+                    Некоторые воспоминания блекнут.<br>
+                    Некоторые остаются навсегда.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="info-modal" id="contacts-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <div class="info-body">
+                <h2>Контакты</h2>
+                <p>Email: d1rtyb1tch0801@gmail.com</p>
+                <p>Telegram: <a href="https://t.me/dirtybitchT_T" target="_blank">@dirtybitchT_T</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-modal" id="delivery-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <div class="info-body">
+                <h2>Условия оплаты и доставки</h2>
+                
+                <div class="info-section">
+                    <p style="color: var(--red); font-weight: 600;">Доставка идет дополнительно к цене товара</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>Доставка по Перми</h3>
+                    <p>Срок доставки от 1 рабочего дня в зависимости от загруженности и наличия товара на складе.</p>
+                    <p><strong>Стоимость доставки:</strong> от 250 рублей</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>Доставка в Регионы</h3>
+                    <p>Доставка заказа для клиентов из регионов России осуществляется транспортными компаниями <strong>СДЭК</strong> или <strong>Ozon</strong> до пункта выдачи, выбранного клиентом, но возможна доставка и до двери.</p>
+                    <p><strong>Стоимость:</strong> от 450 руб. в зависимости от веса посылки и удаленности места доставки, оплата доставки при получении.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>Форма для доставки</h3>
+                    <p>Клиент заполняет при покупке товара:</p>
+                    <ol>
+                        <li>ФИО</li>
+                        <li>Страна</li>
+                        <li>Город</li>
+                        <li>Адрес</li>
+                        <li>Почтовый индекс</li>
+                        <li>Телефон</li>
+                        <li>Telegram (Обязателен для связи продавца с покупателем)</li>
+                        <li>Способ доставки</li>
+                    </ol>
+                </div>
+                
+                <div class="info-section">
+                    <h3>Подтверждение заказа</h3>
+                    <p>После оформления заказа Продавец связывается с Покупателем через Telegram для подтверждения заказа, уточнения деталей и согласования доставки.</p>
+                    <p style="color: var(--red); font-weight: 600;">Заказ считается подтверждённым только после связи с Покупателем.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-modal" id="terms-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <div class="info-body">
+                <h2>Договор Оферты</h2>
+                <p style="text-align: center; font-weight: 600; margin-bottom: 2rem;">ПУБЛИЧНАЯ ОФЕРТА<br>ДОГОВОР КУПЛИ-ПРОДАЖИ ТОВАРОВ ДИСТАНЦИОННЫМ СПОСОБОМ/ЧЕРЕЗ ИНТЕРНЕТ-МАГАЗИН</p>
+                
+                <div class="info-section">
+                    <h3>1. Общие положения</h3>
+                    <p>1.1. Настоящий документ является официальным предложением Продавца заключить договор купли-продажи товаров дистанционным способом.</p>
+                    <p>1.2. Оформляя заказ на сайте, Покупатель подтверждает согласие с условиями настоящей оферты.</p>
+                    <p>1.3. Оферта является публичной. Продавец вправе изменять условия без предварительного уведомления.</p>
+                    <p>1.4. Актуальная версия оферты размещается на сайте интернет-магазина.</p>
+                    <p>1.5. Договор считается заключённым с момента оформления заказа и его оплаты Покупателем.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>2. Предмет договора</h3>
+                    <p>2.1. Продавец предоставляет возможность приобретения одежды и аксессуаров, представленных на сайте.</p>
+                    <p>2.2. Товары предназначены для личного использования, не связанного с предпринимательской деятельностью.</p>
+                    <p>2.3. Все товары, размещённые на сайте, являются частью настоящей оферты.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>3. Оформление заказа</h3>
+                    <p>3.1. Заказ оформляется Покупателем самостоятельно через сайт.</p>
+                    <p>3.2. При оформлении заказа Покупатель обязан указать: имя и фамилию, адрес доставки, контактный телефон, email, Telegram.</p>
+                    <p>3.3. Покупатель несёт ответственность за достоверность предоставленных данных.</p>
+                    <p>3.4. После оформления заказа Покупателю направляется подтверждение.</p>
+                    <p>3.5. Изображения товаров носят иллюстрационный характер и могут отличаться от реального вида.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>4. Цена и оплата</h3>
+                    <p>4.1. Цена товара указывается на сайте.</p>
+                    <p>4.2. Продавец вправе изменять цены в любое время.</p>
+                    <p>4.3. Оплата осуществляется способами, указанными на сайте.</p>
+                    <p>4.4. Заказ может быть оформлен на условиях 100% предоплаты.</p>
+                    <p>4.5. В случае неоплаты заказ может быть автоматически отменён.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>5. Доставка</h3>
+                    <p>5.1. Доставка осуществляется по адресу, указанному Покупателем.</p>
+                    <p>5.2. Сроки доставки зависят от региона и выбранной службы доставки.</p>
+                    <p>5.3. Стоимость доставки оплачивается Покупателем, если не указано иное.</p>
+                    <p>5.4. Риск случайной гибели товара переходит к Покупателю с момента передачи товара службе доставки.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>6. Возврат и обмен товара</h3>
+                    <p>6.1. Покупатель вправе вернуть товар в течение 7 дней с момента получения.</p>
+                    <p>6.2. Возврат возможен при соблюдении условий: товар не был в использовании, сохранены бирки и упаковка.</p>
+                    <p>6.3. Не подлежат возврату товары, входящие в перечень невозвратных (например: нижнее бельё и т.п.).</p>
+                    <p>6.4. Возврат денежных средств осуществляется тем же способом оплаты в течение 10–30 дней.</p>
+                    <p>6.5. Расходы на возврат несёт Покупатель, если товар надлежащего качества.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>7. Отмена заказа</h3>
+                    <p>7.1. Покупатель вправе отменить заказ до момента его отправки.</p>
+                    <p>7.2. После отправки возврат осуществляется по правилам возврата товара.</p>
+                    <p>7.3. Продавец вправе отменить заказ с возвратом средств Покупателю.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>8. Ответственность сторон</h3>
+                    <p>8.1. Стороны несут ответственность в соответствии с применимым законодательством.</p>
+                    <p>8.2. Продавец не несёт ответственности за: задержки доставки по вине третьих лиц, ошибки, допущенные Покупателем при оформлении заказа.</p>
+                    <p>8.3. Ответственность Продавца ограничивается стоимостью оплаченного товара.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>9. Персональные данные</h3>
+                    <p>9.1. Покупатель даёт согласие на обработку персональных данных для выполнения заказа.</p>
+                    <p>9.2. Обработка осуществляется в соответствии с политикой конфиденциальности.</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>10. Заключительные положения</h3>
+                    <p>10.1. Все споры решаются путём переговоров.</p>
+                    <p>10.2. При недостижении соглашения спор передаётся в суд по месту регистрации Продавца.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+// MEMORY — VHS/Glitch Fashion Store - EMBEDDED VERSION
+
+// Встроенные товары для работы без сервера
+window.PRODUCTS_DATA = [
+    {
+        "id": "last-memory-tshirt",
+        "name": "LAST MEMORY T-SHIRT",
+        "price": 3990,
+        "images": [
+            "images/product-1.jpg.jpg",
+            "images/product-2.jpg.jpg",
+            "images/product-3.jpg.jpg",
+            "images/product-4.jpg.jpg",
+            "images/product-5.jpg.jpg"
+        ],
+        "sizes": ["S", "M", "L", "XL"],
+        "category": "last-drop",
+        "description": "Футболка выполнена из хлопка. Материал сохраняет форму и комфорт при ежедневной носке. Дизайн вдохновлён памятью о близком друге, идеей о том, что человек продолжает существовать, пока о нём помнят. Принт нанесён с использованием технологии DFT — изображение устойчиво к износу, не трескается и сохраняет чёткость после стирок. Модель имеет оверсайз посадку.",
+        "in_stock": true,
+        "featured": true
+    }
+];
+
+let products = [];
+let cart = [];
+let favorites = [];
+let selectedProduct = null;
+let selectedSize = null;
+let currentFilter = 'last-drop';
+let selectedPaymentMethod = null;
+let selectedDeliveryMethod = null;
+
+function loadData() {
+  const savedCart = localStorage.getItem('memory-cart');
+  const savedFavorites = localStorage.getItem('memory-favorites');
+  if (savedCart) cart = JSON.parse(savedCart);
+  if (savedFavorites) favorites = JSON.parse(savedFavorites);
+  updateCartUI();
+}
+
+function saveCart() {
+  localStorage.setItem('memory-cart', JSON.stringify(cart));
+  updateCartUI();
+}
+
+function saveFavorites() {
+  localStorage.setItem('memory-favorites', JSON.stringify(favorites));
+}
+
+async function fetchProducts() {
+  if (window.PRODUCTS_DATA && Array.isArray(window.PRODUCTS_DATA)) {
+    products = window.PRODUCTS_DATA;
+    filterProducts(currentFilter);
+  }
+}
+
+function renderProducts(items) {
+  const grid = document.querySelector('.products-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  items.forEach(product => {
+    const isFavorite = favorites.includes(product.id);
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <div class="product-image">
+        <img src="${product.images[0]}" alt="${product.name}" loading="lazy" decoding="async">
+        <button class="product-favorite ${isFavorite ? 'active' : ''}" data-id="${product.id}">
+          ${isFavorite ? '♥' : '♡'}
+        </button>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">${product.name}</h3>
+        <div class="product-price">${product.price} ₽</div>
+      </div>
+    `;
+    
+    // Smooth image loading
+    const img = card.querySelector('img');
+    img.addEventListener('load', () => {
+      img.classList.add('loaded');
+    });
+    if (img.complete) {
+      img.classList.add('loaded');
+    }
+    
+    card.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('product-favorite')) {
+        openProductModal(product);
+      }
+    });
+    const favBtn = card.querySelector('.product-favorite');
+    favBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleFavorite(product.id);
+    });
+    grid.appendChild(card);
+  });
+}
+
+function filterProducts(filter) {
+  currentFilter = filter;
+  if (filter === 'favorites') {
+    const filtered = products.filter(p => favorites.includes(p.id));
+    renderProducts(filtered);
+  } else {
+    const filtered = products.filter(p => p.category === filter);
+    renderProducts(filtered);
+  }
+}
+
+function toggleFavorite(productId) {
+  const index = favorites.indexOf(productId);
+  if (index > -1) {
+    favorites.splice(index, 1);
+  } else {
+    favorites.push(productId);
+  }
+  saveFavorites();
+  filterProducts(currentFilter);
+}
+
+function openProductModal(product) {
+  selectedProduct = product;
+  selectedSize = null;
+  const modal = document.querySelector('.product-modal');
+  const title = modal.querySelector('.modal-title');
+  const price = modal.querySelector('.modal-price');
+  const desc = modal.querySelector('.modal-desc');
+  const galleryMain = modal.querySelector('.gallery-main');
+  const galleryThumbs = modal.querySelector('.gallery-thumbs');
+  const sizeOptions = modal.querySelector('.size-options');
+  const sizeError = modal.querySelector('.size-error');
+  const favoriteBtn = modal.querySelector('.modal-favorite');
+  title.textContent = product.name;
+  price.textContent = `${product.price} ₽`;
+  desc.textContent = product.description || 'Премиальная одежда высокого качества';
+  galleryMain.innerHTML = `<img src="${product.images[0]}" alt="${product.name}" loading="lazy">`;
+  galleryThumbs.innerHTML = product.images.map((img, index) => `
+    <div class="gallery-thumb ${index === 0 ? 'active' : ''}" data-index="${index}">
+      <img src="${img}" alt="${product.name}" loading="lazy">
+    </div>
+  `).join('');
+  galleryThumbs.querySelectorAll('.gallery-thumb').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      const index = parseInt(thumb.dataset.index);
+      galleryMain.innerHTML = `<img src="${product.images[index]}" alt="${product.name}" loading="lazy">`;
+      galleryThumbs.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+    });
+  });
+  sizeOptions.innerHTML = product.sizes.map(size => `
+    <button class="size-btn" data-size="${size}">${size}</button>
+  `).join('');
+  sizeOptions.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      sizeOptions.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedSize = btn.dataset.size;
+      sizeError.textContent = '';
+    });
+  });
+  const isFavorite = favorites.includes(product.id);
+  favoriteBtn.textContent = isFavorite ? '♥' : '♡';
+  favoriteBtn.classList.toggle('active', isFavorite);
+  favoriteBtn.onclick = () => {
+    toggleFavorite(product.id);
+    const newIsFavorite = favorites.includes(product.id);
+    favoriteBtn.textContent = newIsFavorite ? '♥' : '♡';
+    favoriteBtn.classList.toggle('active', newIsFavorite);
+  };
+  sizeError.textContent = '';
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProductModal() {
+  const modal = document.querySelector('.product-modal');
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function addToCart() {
+  const sizeError = document.querySelector('.product-modal .size-error');
+  if (!selectedSize) {
+    sizeError.textContent = 'Пожалуйста, выберите размер';
+    return;
+  }
+  const existing = cart.find(item => item.id === selectedProduct.id && item.size === selectedSize);
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({
+      id: selectedProduct.id,
+      name: selectedProduct.name,
+      price: selectedProduct.price,
+      size: selectedSize,
+      quantity: 1,
+      image: selectedProduct.images[0]
+    });
+  }
+  saveCart();
+  closeProductModal();
+}
+
+function updateCartUI() {
+  const count = document.querySelector('.cart-count');
+  const items = document.querySelector('.cart-items');
+  const amount = document.querySelector('.cart-amount');
+  const empty = document.querySelector('.cart-empty');
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  count.textContent = totalItems;
+  amount.textContent = `${totalPrice} ₽`;
+  if (cart.length === 0) {
+    empty.style.display = 'block';
+    items.querySelectorAll('.cart-item').forEach(el => el.remove());
+  } else {
+    empty.style.display = 'none';
+    renderCartItems();
+  }
+}
+
+function renderCartItems() {
+  const container = document.querySelector('.cart-items');
+  container.querySelectorAll('.cart-item').forEach(el => el.remove());
+  cart.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'cart-item';
+    el.innerHTML = `
+      <img src="${item.image}" alt="${item.name}" class="cart-item-image" loading="lazy">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-size">Размер: ${item.size}</div>
+        <div class="cart-item-price">${item.price} ₽</div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" data-id="${item.id}" data-size="${item.size}" data-action="minus">−</button>
+          <span>${item.quantity}</span>
+          <button class="qty-btn" data-id="${item.id}" data-size="${item.size}" data-action="plus">+</button>
+        </div>
+      </div>
+      <button class="cart-item-remove" data-id="${item.id}" data-size="${item.size}">×</button>
+    `;
+    container.appendChild(el);
+  });
+  document.querySelectorAll('.qty-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      updateQuantity(e.target.dataset.id, e.target.dataset.size, e.target.dataset.action);
+    });
+  });
+  document.querySelectorAll('.cart-item-remove').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      removeFromCart(e.target.dataset.id, e.target.dataset.size);
+    });
+  });
+}
+
+function updateQuantity(id, size, action) {
+  const item = cart.find(i => i.id === id && i.size === size);
+  if (!item) return;
+  if (action === 'plus') {
+    item.quantity += 1;
+  } else if (action === 'minus') {
+    item.quantity -= 1;
+    if (item.quantity <= 0) {
+      removeFromCart(id, size);
+      return;
+    }
+  }
+  saveCart();
+}
+
+function removeFromCart(id, size) {
+  cart = cart.filter(item => !(item.id === id && item.size === size));
+  saveCart();
+}
+
+function openCart() {
+  document.querySelector('.cart-sidebar').classList.add('active');
+  document.querySelector('.cart-overlay').classList.add('active');
+}
+
+function closeCart() {
+  document.querySelector('.cart-sidebar').classList.remove('active');
+  document.querySelector('.cart-overlay').classList.remove('active');
+}
+
+function openCheckout() {
+  if (cart.length === 0) return;
+  closeCart();
+  
+  // Reset selections
+  selectedPaymentMethod = null;
+  selectedDeliveryMethod = null;
+  document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+  document.querySelectorAll('.delivery-option').forEach(opt => opt.classList.remove('selected'));
+  document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+  
+  document.querySelector('.checkout-modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCheckout() {
+  document.querySelector('.checkout-modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Handle payment method selection
+function selectPaymentMethod(method) {
+  selectedPaymentMethod = method;
+  document.querySelectorAll('.payment-option').forEach(option => {
+    option.classList.remove('selected');
+  });
+  const selectedOption = document.querySelector(`.payment-option[data-payment="${method}"]`);
+  if (selectedOption) {
+    selectedOption.classList.add('selected');
+  }
+  const errorEl = document.querySelector('.error-message[data-field="payment"]');
+  if (errorEl) errorEl.textContent = '';
+}
+
+// Handle delivery method selection
+function selectDeliveryMethod(method) {
+  selectedDeliveryMethod = method;
+  document.querySelectorAll('.delivery-option').forEach(option => {
+    option.classList.remove('selected');
+  });
+  const selectedOption = document.querySelector(`.delivery-option[data-delivery="${method}"]`);
+  if (selectedOption) {
+    selectedOption.classList.add('selected');
+  }
+  const errorEl = document.querySelector('.error-message[data-field="delivery"]');
+  if (errorEl) errorEl.textContent = '';
+}
+
+function submitCheckout(e) {
+  e.preventDefault();
+  
+  // Clear previous errors
+  document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+  
+  const formData = new FormData(e.target);
+  const errors = {};
+  
+  // Validate form fields
+  const name = formData.get('name');
+  const email = formData.get('email');
+  const phone = formData.get('phone');
+  const address = formData.get('address');
+  const telegram = formData.get('telegram');
+  
+  if (!name || !name.trim()) {
+    errors.name = 'Имя обязательно для заполнения';
+  }
+  
+  if (!email || !email.trim()) {
+    errors.email = 'Email обязателен для заполнения';
+  } else {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(email)) {
+      errors.email = 'Введите корректный email';
+    }
+  }
+  
+  if (!phone || !phone.trim()) {
+    errors.phone = 'Телефон обязателен для заполнения';
+  }
+  
+  if (!address || !address.trim()) {
+    errors.address = 'Адрес доставки обязателен для заполнения';
+  }
+  
+  if (!telegram || !telegram.trim()) {
+    errors.telegram = 'Telegram обязателен для связи';
+  }
+  
+  // Validate payment method
+  if (!selectedPaymentMethod) {
+    errors.payment = 'Выберите способ оплаты';
+  }
+  
+  // Validate delivery method
+  if (!selectedDeliveryMethod) {
+    errors.delivery = 'Выберите способ доставки';
+  }
+  
+  // Display errors if any
+  if (Object.keys(errors).length > 0) {
+    Object.keys(errors).forEach(field => {
+      const errorEl = document.querySelector(`.error-message[data-field="${field}"]`);
+      if (errorEl) {
+        errorEl.textContent = errors[field];
+      }
+    });
+    
+    // Highlight payment/delivery sections
+    if (errors.payment) {
+      document.querySelector('.payment-methods').classList.add('error');
+    }
+    if (errors.delivery) {
+      document.querySelector('.delivery-methods').classList.add('error');
+    }
+    
+    return;
+  }
+  
+  // Remove error highlights
+  document.querySelector('.payment-methods').classList.remove('error');
+  document.querySelector('.delivery-methods').classList.remove('error');
+  
+  const checkoutData = {
+    name: name,
+    email: email,
+    phone: phone,
+    address: address,
+    telegram: telegram,
+    payment_method: selectedPaymentMethod,
+    delivery_method: selectedDeliveryMethod,
+    items: cart.map(item => ({
+      product_id: item.id,
+      product_name: item.name,
+      size: item.size,
+      quantity: item.quantity,
+      price: item.price
+    }))
+  };
+  
+  // Send to server
+  fetch('/api/checkout', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(checkoutData)
+  })
+  .then(response => response.json())
+  .then(result => {
+    if (result.success) {
+      cart = [];
+      saveCart();
+      closeCheckout();
+      alert(`Заказ оформлен!\n\nНомер заказа: ${result.order_id}\nСпособ оплаты: ${selectedPaymentMethod === 'card' ? 'Банковская карта' : 'Криптовалюта'}\nСпособ доставки: СДЕК\n\nМы свяжемся с вами в ближайшее время.`);
+    } else {
+      alert('Ошибка при оформлении заказа: ' + result.error);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Произошла ошибка при оформлении заказа. Попробуйте еще раз.');
+  });
+}
+
+function openInfoModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeInfoModal(modal) {
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadData();
+  fetchProducts();
+  const cartBtn = document.querySelector('.cart-btn');
+  if (cartBtn) cartBtn.addEventListener('click', openCart);
+  const cartClose = document.querySelector('.cart-close');
+  if (cartClose) cartClose.addEventListener('click', closeCart);
+  const cartOverlay = document.querySelector('.cart-overlay');
+  if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
+  const checkoutBtn = document.querySelector('.cart-checkout');
+  if (checkoutBtn) checkoutBtn.addEventListener('click', openCheckout);
+  const checkoutForm = document.querySelector('.checkout-form');
+  if (checkoutForm) checkoutForm.addEventListener('submit', submitCheckout);
+  
+  // Payment method selection
+  document.querySelectorAll('.payment-option').forEach(option => {
+    option.addEventListener('click', () => {
+      const method = option.dataset.payment;
+      selectPaymentMethod(method);
+    });
+  });
+  
+  // Delivery method selection
+  document.querySelectorAll('.delivery-option').forEach(option => {
+    option.addEventListener('click', () => {
+      const method = option.dataset.delivery;
+      selectDeliveryMethod(method);
+    });
+  });
+  
+  const productModalClose = document.querySelector('.product-modal .modal-close');
+  if (productModalClose) productModalClose.addEventListener('click', closeProductModal);
+  const productModalOverlay = document.querySelector('.product-modal .modal-overlay');
+  if (productModalOverlay) productModalOverlay.addEventListener('click', closeProductModal);
+  const addToCartBtn = document.querySelector('.modal-add-cart');
+  if (addToCartBtn) addToCartBtn.addEventListener('click', addToCart);
+  const checkoutModalClose = document.querySelector('.checkout-modal .modal-close');
+  if (checkoutModalClose) checkoutModalClose.addEventListener('click', closeCheckout);
+  const checkoutModalOverlay = document.querySelector('.checkout-modal .modal-overlay');
+  if (checkoutModalOverlay) checkoutModalOverlay.addEventListener('click', closeCheckout);
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterProducts(btn.dataset.filter);
+    });
+  });
+  document.querySelectorAll('.footer-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modalId = btn.dataset.modal + '-modal';
+      openInfoModal(modalId);
+    });
+  });
+  document.querySelectorAll('.footer-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const modalId = link.dataset.modal + '-modal';
+      openInfoModal(modalId);
+    });
+  });
+  document.querySelectorAll('.info-modal .modal-close').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const modal = e.target.closest('.info-modal');
+      closeInfoModal(modal);
+    });
+  });
+  document.querySelectorAll('.info-modal .modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      const modal = e.target.closest('.info-modal');
+      closeInfoModal(modal);
+    });
+  });
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+});
+    </script>
+    <script>
+    </script>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3 class="footer-title">MEMORY</h3>
+          <p class="footer-tagline">То, что остается</p>
+        </div>
+        
+        <div class="footer-section">
+          <h4 class="footer-heading">Контакты</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:d1rtyb1tch0801@gmail.com">d1rtyb1tch0801@gmail.com</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4 class="footer-heading">Информация</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link" data-modal="size-chart">Размерная сетка</a></li>
+            <li><a href="#" class="footer-link" data-modal="delivery">Доставка и оплата</a></li>
+            <li><a href="#" class="footer-link" data-modal="returns">Возврат и обмен</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4 class="footer-heading">Мы в соцсетях</h4>
+          <div class="footer-socials">
+            <a href="#" class="social-link" aria-label="Instagram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Telegram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21.5 2L2 10.5l7 3.5 1.5 7L14 17l7.5-15z"></path>
+                <path d="M9 10.5l5.5 5.5"></path>
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="VK">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.574-1.496c.586-.19 1.341 1.26 2.138 1.818.605.423 1.064.33 1.064.33l2.137-.03s1.117-.071.587-.966c-.043-.073-.309-.664-1.588-1.88-1.339-1.273-1.16-1.067.453-3.268.983-1.34 1.375-2.158 1.252-2.508-.117-.333-.84-.245-.84-.245l-2.406.015s-.178-.025-.31.056c-.13.08-.213.265-.213.265s-.382 1.037-.89 1.92c-1.07 1.86-1.499 1.96-1.674 1.844-.407-.267-.305-1.075-.305-1.648 0-1.792.266-2.54-.518-2.733-.26-.064-.452-.106-1.118-.113-.855-.009-1.579.003-1.988.208-.272.136-.482.44-.354.458.158.022.516.099.706.363.245.342.236 1.11.236 1.11s.141 2.11-.329 2.372c-.323.18-.765-.187-1.715-1.865-.486-.867-.854-1.825-.854-1.825s-.071-.177-.197-.272c-.153-.115-.367-.152-.367-.152l-2.286.015s-.343.01-.469.162c-.112.135-.009.413-.009.413s1.797 4.282 3.832 6.436c1.87 1.976 3.994 1.846 3.994 1.846h.964z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2024 MEMORY. Все права защищены.</p>
+      </div>
+    </footer>
+
+    <!-- Size Chart Modal -->
+    <div class="info-modal size-chart-modal" id="size-chart-modal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="info-body">
+          <h2>Размерная сетка</h2>
+          
+          <div class="size-table-wrapper">
+            <table class="size-table">
+              <thead>
+                <tr>
+                  <th>Размер</th>
+                  <th>Обхват груди (см)</th>
+                  <th>Длина (см)</th>
+                  <th>Ширина плеч (см)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>S</strong></td>
+                  <td>96-104</td>
+                  <td>71</td>
+                  <td>50</td>
+                </tr>
+                <tr>
+                  <td><strong>M</strong></td>
+                  <td>104-112</td>
+                  <td>74</td>
+                  <td>54</td>
+                </tr>
+                <tr>
+                  <td><strong>L</strong></td>
+                  <td>112-120</td>
+                  <td>77</td>
+                  <td>58</td>
+                </tr>
+                <tr>
+                  <td><strong>XL</strong></td>
+                  <td>120-128</td>
+                  <td>80</td>
+                  <td>62</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="size-guide">
+            <h3>Как правильно измерить</h3>
+            <ul>
+              <li><strong>Обхват груди:</strong> Измерьте по самым выступающим точкам груди</li>
+              <li><strong>Длина:</strong> От высшей точки плеча до низа изделия</li>
+              <li><strong>Ширина плеч:</strong> От одного плечевого шва до другого</li>
+            </ul>
+            <p class="size-note">* Модель имеет оверсайз посадку. Если сомневаетесь между размерами, выбирайте меньший.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delivery Modal -->
+    <div class="info-modal delivery-modal" id="delivery-modal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="info-body">
+          <h2>Доставка и оплата</h2>
+          
+          <div class="info-section">
+            <h3>📦 Доставка</h3>
+            <p><strong>СДЕК</strong> — доставка по всей России</p>
+            <ul>
+              <li>Срок доставки: 2-7 дней</li>
+              <li>Стоимость: от 300₽ (зависит от региона)</li>
+              <li>Отслеживание посылки по трек-номеру</li>
+              <li>Получение в пункте выдачи или курьером до двери</li>
+            </ul>
+          </div>
+          
+          <div class="info-section">
+            <h3>💳 Оплата</h3>
+            <p><strong>Банковская карта</strong></p>
+            <ul>
+              <li>Visa, MasterCard, МИР</li>
+              <li>Безопасная оплата через ЮKassa</li>
+              <li>Мгновенное подтверждение</li>
+            </ul>
+            
+            <p><strong>Криптовалюта</strong></p>
+            <ul>
+              <li>Bitcoin, Ethereum, USDT</li>
+              <li>Оплата через Cryptomus</li>
+              <li>Анонимно и безопасно</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Returns Modal -->
+    <div class="info-modal returns-modal" id="returns-modal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="info-body">
+          <h2>Возврат и обмен</h2>
+          
+          <div class="info-section">
+            <h3>🔄 Условия возврата</h3>
+            <ul>
+              <li>Возврат в течение 14 дней с момента получения</li>
+              <li>Товар должен быть в оригинальной упаковке</li>
+              <li>Без следов носки и повреждений</li>
+              <li>С сохраненными бирками</li>
+            </ul>
+          </div>
+          
+          <div class="info-section">
+            <h3>↔️ Обмен</h3>
+            <p>Обмен на другой размер или товар возможен в течение 14 дней.</p>
+            <p>Стоимость обратной доставки оплачивается покупателем.</p>
+          </div>
+          
+          <div class="info-section">
+            <h3>📧 Как оформить возврат</h3>
+            <ol>
+              <li>Напишите нам на <a href="mailto:info@memory-brand.ru">info@memory-brand.ru</a></li>
+              <li>Укажите номер заказа и причину возврата</li>
+              <li>Мы вышлем инструкции по возврату</li>
+              <li>После получения товара вернем деньги в течение 3-5 дней</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

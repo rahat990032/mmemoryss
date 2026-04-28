@@ -1,0 +1,17 @@
+[
+  {
+    "id": "last-memory-tshirt",
+    "name": "LAST MEMORY T-SHIRT",
+    "price": 3990,
+    "images": [
+      "images/last-memory-tshirt-1.jpg.jpg",
+      "images/last-memory-tshirt-2.jpg.jpg",
+      "images/last-memory-tshirt-3.jpg.jpg",
+      "images/last-memory-tshirt-4.jpg.jpg",
+      "images/last-memory-tshirt-5.jpg.jpg"
+    ],
+    "sizes": ["S", "M", "L", "XL"],
+    "category": "last-drop",
+    "description": "Премиальная футболка из коллекции LAST MEMORY. Высокое качество материалов и уникальный дизайн."
+  }
+]

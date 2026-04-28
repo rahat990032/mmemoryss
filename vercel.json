@@ -6,9 +6,7 @@
     }
   },
   "rewrites": [
-    {
-      "source": "/.netlify/functions/checkout",
-      "destination": "/api/checkout"
+  
     }
   ]
 }

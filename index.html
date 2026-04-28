@@ -2661,7 +2661,7 @@ function submitCheckout(e) {
   };
   
   // Send to server
-  fetch('/api/checkout', {
+  fetch('/.netlify/functions/checkout', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
